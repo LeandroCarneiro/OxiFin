@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OxiFin.Common\OxiFin.Common.csproj" />
+    <ProjectReference Include="..\OxiFin.Domain\OxiFin.Domain.csproj" />
+    <ProjectReference Include="..\OxiFin.Mapping\OxiFin.Mapping.csproj" />
+    <ProjectReference Include="..\OxiFin.ViewModels\OxiFin.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
