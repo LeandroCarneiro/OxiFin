@@ -12,12 +12,14 @@ namespace OxiFin.Bootstrap
         public static IServiceCollection RegisterAppServices(this IServiceCollection service)
         {
             service.AddTransient<UserAppService>();
+            service.AddTransient<LoginAppService>();
             return service;
         }
 
         public static IServiceCollection RegisterAppBusiness(this IServiceCollection service)
         {
             service.AddTransient<IUserBusiness, UserBusiness>();
+            service.AddTransient<ILoginBusiness, LoginBusiness>();
             return service;
         }
 

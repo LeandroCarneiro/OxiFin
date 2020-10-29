@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using OxiFin.Application.AppServices;
+using OxiFin.AppTest.Mocks;
 using OxiFin.DI;
 using OxiFin.ViewModels.AppObjects;
 using System.Threading.Tasks;
@@ -10,30 +11,39 @@ namespace OxiFin.AppTest.UnitTests
     [TestClass]
     public class LoginTest : BaseTest
     {
-        protected UserAppService _AppService;
+        protected LoginAppService _AppService;
         
         public LoginTest() : base()
         {
-            _AppService = AppContainer.Resolve<UserAppService>();
+            _AppService = AppContainer.Resolve<LoginAppService>();
+            //_AppService.Add(LoginMock.Default);
         }
 
         [TestMethod]
-        public void Login()
+        public void LoginFail()
         {
-            var mock = new Mock<UserApp_vw>().Object;
-            var result = _AppService.Add(mock);
+            var mock = LoginMock.CreateLogin();
+            var result = _AppService.Login(mock);
 
-            Assert.AreEqual(result, 1);
+            Assert.AreEqual(result, null);
+        }
+
+        [TestMethod]
+        public void LoginSuccess()
+        {
+            var mock = LoginMock.Default;
+            var result = _AppService.Login(mock);
+
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public async Task LogOut()
         {
-            var mock = new Mock<UserApp_vw>().Object;
-            var result = _AppService.Add(mock);
+            var mock = LoginMock.Default;
+            await _AppService.LogOut(mock);
 
-            var user = await _AppService.FindByIdAsync(result);            
-            Assert.AreEqual(user.Email, mock.Email);
+            Assert.IsTrue(true);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using OxiFin.Application.AppServices;
+using OxiFin.AppTest.Mocks;
 using OxiFin.DI;
 using OxiFin.ViewModels.AppObjects;
 using System.Threading.Tasks;
@@ -20,10 +21,10 @@ namespace OxiFin.AppTest.UnitTests
         [TestMethod]
         public void Create()
         {
-            var mock = new Mock<UserApp_vw>().Object;
+            var mock = LoginMock.Default;
             var result = _AppService.Add(mock);
 
-            Assert.AreEqual(result, 1);
+            Assert.IsTrue(result > 0);
         }
 
         [TestMethod]
