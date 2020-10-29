@@ -3,7 +3,7 @@
 namespace OxiFin.Domain.Entities
 {
     [Table("tblDebtors")]
-    public class Debtor : UserApp
+    public class Debtor : EntityBase<long>
     {
         public string Name { get; set; }
         public string CPF { get; set; }
@@ -11,8 +11,8 @@ namespace OxiFin.Domain.Entities
         public long BankAccountId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual UserApp CreatedBy { get; set; }
+        public virtual UserApp User { get; set; }
         [ForeignKey(nameof(BankAccountId))]
-        public BankAccount BankAccount { get; set; }
+        public virtual BankAccount BankAccount { get; set; }
     }
 }

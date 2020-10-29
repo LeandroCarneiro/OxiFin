@@ -5,17 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <Compile Remove="Migrations\20201029104734_CreateTables.cs" />
+    <Compile Remove="Migrations\20201029104734_CreateTables.Designer.cs" />
+    <Compile Remove="Migrations\20201029105831_OtherTables.cs" />
+    <Compile Remove="Migrations\20201029105831_OtherTables.Designer.cs" />
+    <Compile Remove="Migrations\20201029110404_CreateTables.cs" />
+    <Compile Remove="Migrations\20201029110404_CreateTables.Designer.cs" />
+    <Compile Remove="Migrations\20201029110904_CreateTables.cs" />
+    <Compile Remove="Migrations\20201029110904_CreateTables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
   </ItemGroup>
 
   <ItemGroup>

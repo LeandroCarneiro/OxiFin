@@ -34,7 +34,7 @@ namespace OxiFin.Bootstrap
 
         private static void Migrate(IServiceCollection services)
         {
-            var dao = services.BuildServiceProvider().GetService<TeslaDbContext>();
+            var dao = services.BuildServiceProvider().GetService<MySqlDbContext>();
             dao.Database.EnsureCreated();
             //dao.Database.Migrate();
         }

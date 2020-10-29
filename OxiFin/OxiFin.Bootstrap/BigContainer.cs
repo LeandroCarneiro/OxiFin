@@ -23,8 +23,8 @@ namespace OxiFin.Bootstrap
 
         public static IServiceCollection RegisterAppPersistence(this IServiceCollection service)
         {
-            service.AddDbContext<TeslaDbContext>();
-            service.AddTransient<IDbContext, TeslaDbContext>();
+            service.AddDbContext<MySqlDbContext>();
+            service.AddTransient<IDbContext, MySqlDbContext>();
             return service;
         }
 

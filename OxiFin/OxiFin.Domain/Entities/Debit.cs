@@ -3,7 +3,7 @@
 namespace OxiFin.Domain.Entities
 {
     [Table("tblDebts")]
-    public class Debit
+    public class Debit : EntityBase<long>
     {
         public string Description { get; set; }
         public long DebtorId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace OxiFin.Domain.Entities
 {
-    [Table("tbl_users")]
+    [Table("tblUsers")]
     public class UserApp : EntityBase<long>
     {        
         public string Username { get; set; }

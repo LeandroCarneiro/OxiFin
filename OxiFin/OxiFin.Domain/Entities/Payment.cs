@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OxiFin.Domain.Entities
 {
     [Table("tblPayments")]
-    public class Payment
+    public class Payment : EntityBase<long>
     {
         public long BillId { get; set; }
         public decimal Amount { get; set; }
@@ -13,6 +13,6 @@ namespace OxiFin.Domain.Entities
         public DateTime Date { get; set; }
 
         [ForeignKey(nameof(BillId))]
-        public Bill Bill { get; set; }
+        public virtual Bill Bill { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace OxiFin.Domain.Entities
         public long DebtorId { get; set; }
         
         [ForeignKey(nameof(DebtorId))]
-        public Debtor Debtor { get; set; }
+        public virtual Debtor Debtor { get; set; }
     }
 }
