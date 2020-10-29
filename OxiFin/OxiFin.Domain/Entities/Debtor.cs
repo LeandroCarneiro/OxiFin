@@ -2,13 +2,17 @@
 
 namespace OxiFin.Domain.Entities
 {
-    [Table("tbl_survey_version")]
-    public class Debtor : EntityBase<long>
+    [Table("tblDebtors")]
+    public class Debtor : UserApp
     {
-        public long UserId { get; set; }
         public string Name { get; set; }
-        public int MyProperty { get; set; }
+        public string CPF { get; set; }
+        public long UserId { get; set; }
+        public long BankAccountId { get; set; }
+
         [ForeignKey(nameof(UserId))]
         public virtual UserApp CreatedBy { get; set; }
+        [ForeignKey(nameof(BankAccountId))]
+        public BankAccount BankAccount { get; set; }
     }
 }

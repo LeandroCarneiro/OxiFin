@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace OxiFin.Business.Domain
 {
@@ -35,19 +36,21 @@ namespace OxiFin.Business.Domain
             }
         }
 
-        public TEntity Find(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
-            return Set.SingleOrDefault(expression);
+            return await Set.SingleOrDefaultAsync(expression);
         }
 
-        public TEntity FindById(long id)
+        public async Task<TEntity> FindById(long id, bool asNoTracking = false)
         {
-            return Set.SingleOrDefault(x => x.Id == id);
+            return asNoTracking ?
+                await Set.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id) :
+                await Set.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public IEnumerable<TEntity> List(Expression<Func<TEntity, bool>> expression)
+        public async Task<IEnumerable<TEntity>> List(Expression<Func<TEntity, bool>> expression)
         {
-            return Set.Where(expression).ToList();
+            return await Set.Where(expression).ToListAsync();
         }
 
         public void Update(TEntity obj)

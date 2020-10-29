@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace OxiFin.Data
 {
@@ -16,6 +17,7 @@ namespace OxiFin.Data
         protected readonly IConfiguration _configuration;
         protected readonly ILoggerFactory _loggerFactory;
         protected readonly ILogger _log;
+        private IDbContextTransaction _transation;
 
         public BaseContext() : base()
         {
@@ -27,7 +29,10 @@ namespace OxiFin.Data
 
         public IDbContextTransaction BeginTransaction()
         {
-            return Database.BeginTransaction();
+            if(_transation == null)
+                _transation = Database.BeginTransaction();
+            
+            return _transation;
         }
 
         public void Rollback()
@@ -35,11 +40,11 @@ namespace OxiFin.Data
             Dispose();
         }
 
-        public void Commit()
+        public async Task Commit()
         {
             try
             {
-                SaveChanges();
+                await SaveChangesAsync();
             }
             catch (Exception ex)
             {

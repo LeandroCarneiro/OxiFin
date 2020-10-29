@@ -11,14 +11,12 @@ namespace OxiFin.Bootstrap
     {
         public static IServiceCollection RegisterAppServices(this IServiceCollection service)
         {
-            service.AddTransient<SurveyVersionAppService>();
             service.AddTransient<UserAppService>();
             return service;
         }
 
         public static IServiceCollection RegisterAppBusiness(this IServiceCollection service)
         {
-            service.AddTransient<ISurveyVersionBusiness, SurveyBusiness>();
             service.AddTransient<IUserBusiness, UserBusiness>();
             return service;
         }

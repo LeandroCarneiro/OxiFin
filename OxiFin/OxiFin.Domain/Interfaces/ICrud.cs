@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace OxiFin.Domain.Interfaces
 {
@@ -9,9 +10,9 @@ namespace OxiFin.Domain.Interfaces
     {
         TIdType Add(T obj);
         void Update(T obj);
-        T FindById(TIdType id);
-        T Find(Expression<Func<T, bool>> expression);
-        IEnumerable<T> List(Expression<Func<T, bool>> expression);
+        Task<T> FindById(TIdType id, bool asNoTracking = false);
+        Task<T> Find(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> List(Expression<Func<T, bool>> expression);
 
         IQueryable<T> SetIncluding { get; }
         IQueryable<T> SetIncludingTracking { get; }

@@ -12,10 +12,7 @@ namespace OxiFin.Mapping.Profiles
         {
             CreateMap<EntityBase<long>, EntityBase_vw<long>>().ReverseMap();
             CreateMap<UserApp, UserApp_vw>().ReverseMap();
-            CreateMap<Debtor, SurveyVersion_vw>().ReverseMap();
-            CreateMap<Survey, Survey_vw>().ReverseMap();
-            CreateMap<Answer, Answer_vw>().ReverseMap();
-            CreateMap<Question, Question_vw>().ReverseMap();
+            CreateMap<Debtor, Debtor_vw>().ReverseMap();
         }
     }
 }

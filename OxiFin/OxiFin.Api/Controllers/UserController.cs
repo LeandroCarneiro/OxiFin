@@ -16,7 +16,7 @@ namespace OxiFin.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return ReturnResult(_appService.FindById(id));
+            return ReturnResult(_appService.FindByIdAsync(id));
         }
 
         [HttpPost]

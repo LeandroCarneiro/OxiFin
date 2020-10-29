@@ -38,4 +38,8 @@
     <ProjectReference Include="..\OxiFin\OxiFin.Bootstrap\OxiFin.Bootstrap.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mocks\" />
+  </ItemGroup>
+
 </Project>

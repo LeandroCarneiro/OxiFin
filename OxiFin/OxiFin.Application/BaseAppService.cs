@@ -1,9 +1,11 @@
-﻿using OxiFin.Common.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using OxiFin.Common.Exceptions;
 using OxiFin.Domain;
 using OxiFin.Mapping;
 using OxiFin.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OxiFin.Application
 {
@@ -28,9 +30,9 @@ namespace OxiFin.Application
             _baseBusiness.Update(Resolve(obj));
         }
 
-        public virtual T_vw FindById(long id)
+        public virtual async Task<T_vw> FindByIdAsync(long id)
         {
-            return Resolve(_baseBusiness.SetIncluding.SingleOrDefault(x => x.Id == id));
+            return Resolve(await _baseBusiness.SetIncluding.SingleOrDefaultAsync(x => x.Id == id));
         }
 
         #region resolver

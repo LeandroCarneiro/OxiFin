@@ -7,9 +7,6 @@ namespace OxiFin.Data.Contexts
 {
     public class MockDbContext : BaseContext, IDbContext
     {
-        public virtual DbSet<Survey> tblSurveis { get; set; }
-        public virtual DbSet<Question> tblQuestions { get; set; }
-        public virtual DbSet<Answer> tblAnswers { get; set; }
         public virtual DbSet<UserApp> tblUsers { get; set; }
         public virtual DbSet<Debtor> tblSurveyVersions { get; set; }
 

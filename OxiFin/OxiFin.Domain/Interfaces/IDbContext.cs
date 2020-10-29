@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Threading.Tasks;
 
 namespace OxiFin.Domain.Interfaces
 {
@@ -9,7 +10,7 @@ namespace OxiFin.Domain.Interfaces
     {
         IDbContextTransaction BeginTransaction();
         void Rollback();
-        void Commit();
+        Task Commit();
 
         DbSet<TEntity> GetEntity<TEntity>() where TEntity : EntityBase<long>;
         EntityEntry EntryEntity<TEntity>(TEntity entity) where TEntity : EntityBase<long>;
