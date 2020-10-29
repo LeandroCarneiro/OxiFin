@@ -7,4 +7,10 @@ namespace OxiFin.Application.Interfaces
     {
         Task DesativeAsync(long userId);
     }
+
+    public interface ILoginBusiness : IUserBusiness
+    {
+        Task<UserApp> Login(UserApp user);
+        Task LogOut(UserApp user);
+    }
 }

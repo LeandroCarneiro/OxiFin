@@ -11,7 +11,7 @@ namespace OxiFin.Domain.Interfaces
         TIdType Add(T obj);
         void Update(T obj);
         Task<T> FindById(TIdType id, bool asNoTracking = false);
-        Task<T> Find(Expression<Func<T, bool>> expression);
+        Task<T> Find(Expression<Func<T, bool>> expression, bool asNoTracking = false);
         Task<IEnumerable<T>> List(Expression<Func<T, bool>> expression);
 
         IQueryable<T> SetIncluding { get; }

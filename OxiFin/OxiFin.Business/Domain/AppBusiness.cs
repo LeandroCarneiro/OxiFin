@@ -36,15 +36,19 @@ namespace OxiFin.Business.Domain
             }
         }
 
-        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> expression, bool asNoTracking = false)
         {
-            return await Set.SingleOrDefaultAsync(expression);
+            return asNoTracking ? 
+                await Set.AsNoTracking().SingleOrDefaultAsync(expression)
+                :
+                await Set.SingleOrDefaultAsync(expression);
         }
 
         public async Task<TEntity> FindById(long id, bool asNoTracking = false)
         {
             return asNoTracking ?
-                await Set.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id) :
+                await Set.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id) 
+                :
                 await Set.SingleOrDefaultAsync(x => x.Id == id);
         }
 
