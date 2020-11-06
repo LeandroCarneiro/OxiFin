@@ -10,8 +10,6 @@ namespace OxiFin.Domain.Entities
         public long UserId { get; set; }
         public long BankAccountId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public virtual UserApp User { get; set; }
         [ForeignKey(nameof(BankAccountId))]
         public virtual BankAccount BankAccount { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OxiFin.Common.Exceptions;
+using OxiFin.Common.InternalObjects;
 using OxiFin.Domain;
 using OxiFin.Mapping;
 using OxiFin.ViewModels;
@@ -10,8 +11,8 @@ using System.Threading.Tasks;
 namespace OxiFin.Application
 {
     public class BaseAppService<T_vw, T>
-        where T_vw : EntityBase_vw<long>
-        where T : EntityBase<long>
+        where T_vw : IEntity<long>
+        where T : IEntity<long>
     {
         protected readonly IBusiness<T> _baseBusiness;
 
@@ -32,7 +33,7 @@ namespace OxiFin.Application
 
         public virtual async Task<T_vw> FindByIdAsync(long id)
         {
-            return Resolve(await _baseBusiness.SetIncluding.SingleOrDefaultAsync(x => x.Id == id));
+            return Resolve(await _baseBusiness.FindById(id, true));
         }
 
         #region resolver

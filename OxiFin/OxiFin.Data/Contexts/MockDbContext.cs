@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using OxiFin.Domain.Interfaces;
 
 namespace OxiFin.Data.Contexts

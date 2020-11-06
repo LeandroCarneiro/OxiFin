@@ -1,5 +1,7 @@
 ﻿using OxiFin.Application.Interfaces;
+using OxiFin.Common.InternalObjects;
 using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using OxiFin.ViewModels.AppObjects;
 using System.Threading.Tasks;
 
@@ -14,10 +16,12 @@ namespace OxiFin.Application.AppServices
             _business = business;
         }
 
-        public async Task Login(UserApp_vw user)
+        public async Task<AppResult> Login(UserApp_vw user)
         {
             var entity = Resolve(user);
-            await _business.Login(entity);
+            var result = await _business.Login(entity);
+
+            return new AppResult(result);
         }
         
         public async Task LogOut(UserApp_vw user)

@@ -1,7 +1,6 @@
 ﻿using OxiFin.Application.Interfaces;
-using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using OxiFin.ViewModels.AppObjects;
-using System;
 using System.Threading.Tasks;
 
 namespace OxiFin.Application.AppServices

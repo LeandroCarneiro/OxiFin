@@ -1,5 +1,4 @@
 ﻿using OxiFin.DI;
-using OxiFin.Domain;
 using OxiFin.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,21 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using OxiFin.Domain;
 
-namespace OxiFin.Business.Domain
+namespace OxiFin.Business
 {
     public abstract class AppBusiness<TEntity> : ICrud<TEntity, long> where TEntity : EntityBase<long>
     {
         protected readonly IDbContext _uow;
-        protected DbSet<TEntity> Set;
-
-        public virtual IQueryable<TEntity> SetIncluding => Set.AsNoTracking();
-        public virtual IQueryable<TEntity> SetIncludingTracking => Set.AsTracking();
+        protected DbSet<TEntity> Set => _uow.GetEntity<TEntity>();
 
         public AppBusiness()
         {
-            _uow = AppContainer.Resolve<IDbContext>();
-            Set = _uow.GetEntity<TEntity>();
+            _uow = AppContainer.Resolve<IDbContext>();            
         }
 
         public long Add(TEntity obj)

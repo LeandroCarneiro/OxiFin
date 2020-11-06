@@ -2,7 +2,7 @@
 using OxiFin.ViewModels.AppObjects;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OxiFin.Api.Controllers
+namespace OxiFin.Auth.Controllers
 {
     public class UserController : BaseController
     {

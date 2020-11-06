@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OxiFin.Domain;
 using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using OxiFin.ViewModels;
 using OxiFin.ViewModels.AppObjects;
 

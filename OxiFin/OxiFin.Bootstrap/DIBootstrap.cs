@@ -1,8 +1,9 @@
 ﻿using OxiFin.Data.Contexts;
 using OxiFin.DI;
 using OxiFin.Mapping;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using OxiFin.Domain.Entities.Auth;
 
 namespace OxiFin.Bootstrap
 {
@@ -13,6 +14,10 @@ namespace OxiFin.Bootstrap
             service.RegisterAppServices()
                 .RegisterAppBusiness()
                 .RegisterAppPersistence();
+
+            service.AddIdentity<UserApp, Role>()
+            .AddEntityFrameworkStores<AuthDbContext>()
+            .AddDefaultTokenProviders();
 
             AppContainer.SetContainer(service);
             AutoMapperConfiguration.Register();

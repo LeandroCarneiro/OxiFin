@@ -1,5 +1,7 @@
 ﻿using OxiFin.Application.Interfaces;
+using OxiFin.Business.Auth;
 using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using System.Threading.Tasks;
 
 namespace OxiFin.Business.Domain
@@ -12,7 +14,7 @@ namespace OxiFin.Business.Domain
             return result;
         }
 
-        public Task LogOut(UserApp user)
+        public async Task LogOut(UserApp user)
         {
             throw new System.NotImplementedException();
         }

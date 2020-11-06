@@ -8,8 +8,5 @@ namespace OxiFin.Domain.Entities
         public string Name { get; set; }
         public decimal Incomes { get; set; }
         public long UserId { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        public virtual UserApp User { get; set; }
     }
 }

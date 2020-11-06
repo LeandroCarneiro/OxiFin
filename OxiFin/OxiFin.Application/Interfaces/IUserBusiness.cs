@@ -1,4 +1,5 @@
 ﻿using OxiFin.Domain.Entities;
+using OxiFin.Domain.Entities.Auth;
 using System.Threading.Tasks;
 
 namespace OxiFin.Application.Interfaces

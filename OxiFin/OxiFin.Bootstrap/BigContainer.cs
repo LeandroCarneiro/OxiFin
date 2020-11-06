@@ -4,6 +4,7 @@ using OxiFin.Business.Domain;
 using OxiFin.Data.Contexts;
 using OxiFin.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using OxiFin.Business.Auth;
 
 namespace OxiFin.Bootstrap
 {

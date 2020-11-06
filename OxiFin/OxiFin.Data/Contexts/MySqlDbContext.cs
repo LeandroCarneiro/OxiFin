@@ -7,7 +7,6 @@ namespace OxiFin.Data.Contexts
 {
     public class MySqlDbContext : BaseContext, IDbContext
     {
-        public virtual DbSet<UserApp> tblUsers { get; set; }
         public virtual DbSet<Debtor> tblDebtors { get; set; }
         public virtual DbSet<Debit> tblDebts { get; set; }
         public virtual DbSet<Payer> tblPayers { get; set; }
