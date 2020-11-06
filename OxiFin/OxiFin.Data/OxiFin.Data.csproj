@@ -13,6 +13,42 @@
     <Compile Remove="Migrations\20201029110404_CreateTables.Designer.cs" />
     <Compile Remove="Migrations\20201029110904_CreateTables.cs" />
     <Compile Remove="Migrations\20201029110904_CreateTables.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106124720_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106124720_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106131327_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106131327_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106131855_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106131855_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106132728_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106132728_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106133704_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106133704_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106145802_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106145802_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106150214_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106150214_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106150457_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106150457_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106151443_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106151443_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106151628_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106151628_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106152144_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106152144_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106152806_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106152806_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106154423_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106154423_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106154539_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106154539_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106161237_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106161237_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106163439_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106163439_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106165911_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106165911_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106171656_AddIdentity.cs" />
+    <Compile Remove="Migrations\AuthDb\20201106171656_AddIdentity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

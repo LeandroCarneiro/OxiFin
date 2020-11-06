@@ -1,6 +1,4 @@
-﻿using OxiFin.Domain.Entities;
-using OxiFin.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OxiFin.Domain.Entities.Auth;
@@ -9,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OxiFin.Data.Contexts
 {
-    public class AuthDbContext : IdentityDbContext<UserApp, Role, long>
+    public class AuthDbContext : IdentityDbContext<UserApp, Role, long, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         protected readonly IConfiguration _configuration;
         protected readonly ILoggerFactory _loggerFactory;
@@ -29,6 +27,11 @@ namespace OxiFin.Data.Contexts
             base.OnConfiguring(options);
 
             options.UseLoggerFactory(_loggerFactory);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
     }
 }

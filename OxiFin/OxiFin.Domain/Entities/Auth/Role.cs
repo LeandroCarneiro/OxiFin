@@ -6,4 +6,8 @@ namespace OxiFin.Domain.Entities.Auth
     { 
     
     }
+
+    public class RoleClaim : IdentityRoleClaim<long>
+    {
+    }
 }

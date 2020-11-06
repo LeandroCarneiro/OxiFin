@@ -4,6 +4,7 @@ using OxiFin.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using OxiFin.Domain.Entities.Auth;
+using System;
 
 namespace OxiFin.Bootstrap
 {
@@ -15,7 +16,14 @@ namespace OxiFin.Bootstrap
                 .RegisterAppBusiness()
                 .RegisterAppPersistence();
 
-            service.AddIdentity<UserApp, Role>()
+            service.AddIdentity<UserApp, Role>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1d);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+            })
             .AddEntityFrameworkStores<AuthDbContext>()
             .AddDefaultTokenProviders();
 

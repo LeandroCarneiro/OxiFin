@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace OxiFin.Api
 {
@@ -23,6 +24,7 @@ namespace OxiFin.Api
             {
                 options.ValueCountLimit = int.MaxValue;
                 options.ValueLengthLimit = int.MaxValue;
+                
             });
 
             services.AddCors();

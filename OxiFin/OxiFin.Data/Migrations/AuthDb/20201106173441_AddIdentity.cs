@@ -43,7 +43,6 @@ namespace OxiFin.Data.Migrations.AuthDb
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     Active = table.Column<bool>(nullable: false)
                 },
@@ -101,11 +100,12 @@ namespace OxiFin.Data.Migrations.AuthDb
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<long>(nullable: false)
+                    UserId = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider});
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -119,7 +119,8 @@ namespace OxiFin.Data.Migrations.AuthDb
                 columns: table => new
                 {
                     UserId = table.Column<long>(nullable: false),
-                    RoleId = table.Column<long>(nullable: false)
+                    RoleId = table.Column<long>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,11 +146,12 @@ namespace OxiFin.Data.Migrations.AuthDb
                     UserId = table.Column<long>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
+                    Id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.Id });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
