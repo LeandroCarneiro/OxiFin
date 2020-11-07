@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using OxiFin.Domain.Entities;
+using OxiFin.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OxiFin.Domain.Entities.Auth;
 using OxiFin.DI;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
+using OxiFin.Data.Configuration;
 
 namespace OxiFin.Data.Contexts
 {
@@ -32,6 +36,7 @@ namespace OxiFin.Data.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
     }
 }
