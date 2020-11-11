@@ -21,9 +21,9 @@ namespace OxiFin.Application
             _baseBusiness = business;
         }
 
-        public virtual long Add(T_vw obj)
+        public virtual AppResult Add(T_vw obj)
         {
-            return _baseBusiness.Add(Resolve(obj));
+            return new AppResult(_baseBusiness.Add(Resolve(obj)));
         }
 
         public virtual void Update(T_vw obj)
@@ -31,9 +31,14 @@ namespace OxiFin.Application
             _baseBusiness.Update(Resolve(obj));
         }
 
-        public virtual async Task<T_vw> FindByIdAsync(long id)
+        public virtual async Task<AppResult<T_vw>> FindByIdAsync(long id)
         {
-            return Resolve(await _baseBusiness.FindById(id, true));
+            var result = await _baseBusiness.FindById(id, true);
+            
+            if (result == null)
+                return new AppResult<T_vw>("Not found");
+
+            return new AppResult<T_vw>(Resolve(result));
         }
 
         #region resolver

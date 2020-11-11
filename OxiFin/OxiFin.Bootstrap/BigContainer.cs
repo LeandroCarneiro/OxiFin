@@ -5,6 +5,8 @@ using OxiFin.Data.Contexts;
 using OxiFin.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using OxiFin.Business.Auth;
+using Microsoft.AspNetCore.Identity;
+using OxiFin.Domain.Entities.Auth;
 
 namespace OxiFin.Bootstrap
 {
@@ -14,6 +16,8 @@ namespace OxiFin.Bootstrap
         {
             service.AddTransient<UserAppService>();
             service.AddTransient<LoginAppService>();
+            service.AddTransient<UserManager<UserApp>>();
+
             return service;
         }
 
@@ -26,7 +30,7 @@ namespace OxiFin.Bootstrap
 
         public static IServiceCollection RegisterAppPersistence(this IServiceCollection service)
         {
-            service.AddDbContext<MySqlDbContext>();
+            service.AddDbContext<AuthDbContext>();
             service.AddTransient<IDbContext, MySqlDbContext>();
             return service;
         }

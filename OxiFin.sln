@@ -31,7 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C128DE9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxiFin.AppTest", "OxiFin.AppTest\OxiFin.AppTest.csproj", "{06915EDA-F2D6-415E-8424-B86DC1339E93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OxiFin.Auth", "OxiFin.Auth\OxiFin.Auth.csproj", "{1AC7D04D-7BCE-494C-BA87-FA980EE919D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxiFin.Auth", "OxiFin.Auth\OxiFin.Auth.csproj", "{1AC7D04D-7BCE-494C-BA87-FA980EE919D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{007D0C1C-4108-4367-B66B-93F76FFD6969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{1AC7D04D-7BCE-494C-BA87-FA980EE919D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AC7D04D-7BCE-494C-BA87-FA980EE919D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AC7D04D-7BCE-494C-BA87-FA980EE919D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007D0C1C-4108-4367-B66B-93F76FFD6969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007D0C1C-4108-4367-B66B-93F76FFD6969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007D0C1C-4108-4367-B66B-93F76FFD6969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007D0C1C-4108-4367-B66B-93F76FFD6969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

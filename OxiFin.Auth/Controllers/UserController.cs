@@ -1,6 +1,8 @@
 ﻿using OxiFin.Application.AppServices;
 using OxiFin.ViewModels.AppObjects;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace OxiFin.Auth.Controllers
 {
@@ -10,26 +12,30 @@ namespace OxiFin.Auth.Controllers
 
         public UserController(UserAppService appService)
         {
-            this._appService = appService;
+            _appService = appService;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpPost("signup")]
+        public async Task<IActionResult> SignUp(UserApp_vw request)
         {
-            return ReturnResult(_appService.FindByIdAsync(id));
+            var result = await _appService.SignUp(request);
+            return ReturnResult(result);
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] UserApp_vw value)
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn(Login_vw request)
         {
-            return ReturnResult(_appService.Add(value));
+            var result = await _appService.SignIn(request);
+            return ReturnResult(result);
         }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] UserApp_vw value)
+        [HttpPost("Desative")]
+        public async Task<IActionResult> Desative(long id)
         {
-            _appService.Update(value);
+            await _appService.DesativateAsync(id);
             return Ok();
         }
+
+
     }
 }

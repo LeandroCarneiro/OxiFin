@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\OxiFin.Common\OxiFin.Common.csproj" />
   </ItemGroup>
 

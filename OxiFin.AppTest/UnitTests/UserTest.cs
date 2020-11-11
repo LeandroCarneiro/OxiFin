@@ -24,7 +24,7 @@ namespace OxiFin.AppTest.UnitTests
             var mock = LoginMock.Default;
             var result = _AppService.Add(mock);
 
-            Assert.IsTrue(result > 0);
+            Assert.IsFalse(result.HasError);
         }
 
         [TestMethod]
@@ -33,8 +33,8 @@ namespace OxiFin.AppTest.UnitTests
             var mock = new Mock<UserApp_vw>().Object;
             var result = _AppService.Add(mock);
 
-            var user = await _AppService.FindByIdAsync(result);            
-            Assert.AreEqual(user.Email, mock.Email);
+            var user = await _AppService.FindByIdAsync((int)result.Result);            
+            Assert.AreEqual(user.Result.Email, mock.Email);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace OxiFin.AppTest.UnitTests
             var mock = new Mock<UserApp_vw>().Object;
             var result = _AppService.Add(mock);
 
-            await _AppService.DesativateAsync(result);
+            await _AppService.DesativateAsync((int)result.Result);
             Assert.IsTrue(true);
         }
     }

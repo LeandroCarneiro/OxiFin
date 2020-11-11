@@ -47,7 +47,7 @@ namespace OxiFin.Bootstrap
 
         private static void Migrate(IServiceCollection services)
         {
-            var dao = services.BuildServiceProvider().GetService<MySqlDbContext>();
+            var dao = services.BuildServiceProvider().GetService<AuthDbContext>();
             dao.Database.EnsureCreated();
             //dao.Database.Migrate();
         }
