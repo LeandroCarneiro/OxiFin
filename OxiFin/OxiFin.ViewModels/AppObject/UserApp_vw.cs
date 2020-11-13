@@ -9,7 +9,7 @@
         public string Phone { get; set; }       
     }
 
-    public class Login_vw
+    public class Login_vw : EntityBase_vw<long>
     {
         public string Username { get; set; }
         public string Password { get; set; }

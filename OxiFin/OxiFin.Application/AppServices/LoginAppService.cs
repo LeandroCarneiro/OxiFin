@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OxiFin.Application.AppServices
 {
-    public class LoginAppService : BaseAppService<UserApp_vw, UserApp>
+    public class LoginAppService : BaseAppService<Login_vw, UserApp>
     {
         readonly ILoginBusiness _business;
 
@@ -16,7 +16,7 @@ namespace OxiFin.Application.AppServices
             _business = business;
         }
 
-        public async Task<AppResult> Login(UserApp_vw user)
+        public async Task<AppResult> Login(Login_vw user)
         {
             var entity = Resolve(user);
             var result = await _business.Login(entity);
@@ -24,7 +24,7 @@ namespace OxiFin.Application.AppServices
             return new AppResult(result);
         }
         
-        public async Task LogOut(UserApp_vw user)
+        public async Task LogOut(Login_vw user)
         {
             var entity = Resolve(user);
             await _business.LogOut(entity);

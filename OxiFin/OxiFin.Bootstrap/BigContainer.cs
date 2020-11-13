@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using OxiFin.Domain.Entities.Auth;
 using OxiFin.Domain.Entities;
 using OxiFin.Application;
+using OxiFin.Business.App;
 
 namespace OxiFin.Bootstrap
 {
@@ -40,7 +41,6 @@ namespace OxiFin.Bootstrap
         
         public static IServiceCollection RegisterAppServices(this IServiceCollection service)
         {
-            service.AddTransient<UserAppService>();
             service.AddTransient<BankAccountAppService>();
             service.AddTransient<DebitAppService>();
             service.AddTransient<DebtorAppService>();
@@ -52,6 +52,7 @@ namespace OxiFin.Bootstrap
         public static IServiceCollection RegisterAppBusiness(this IServiceCollection service)
         {
             service.AddTransient<IBusiness<Debtor>, DebtorBusiness>();
+            service.AddTransient<IBusiness<BankAccount>, BankAccountBusiness>();
             service.AddTransient<IBusiness<Payer>, PayerBusiness>();
             service.AddTransient<IBusiness<Debit>, DebitBusiness>();
             service.AddTransient<IBusiness<Bill>, BillBusiness>();
