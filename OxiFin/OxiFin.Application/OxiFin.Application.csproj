@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OxiFin.Common\OxiFin.Common.csproj" />
     <ProjectReference Include="..\OxiFin.DI\OxiFin.DI.csproj" />
     <ProjectReference Include="..\OxiFin.Domain\OxiFin.Domain.csproj" />

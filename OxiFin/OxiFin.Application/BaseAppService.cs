@@ -57,7 +57,9 @@ namespace OxiFin.Application
             return MappingWraper.Map<T_vw, T>(viewModel);
         }
 
-        protected TTo Resolve<TFrom, TTo>(TFrom entity) where TFrom : EntityBase_vw<long> where TTo : EntityBase<long>
+        protected TTo Resolve<TFrom, TTo>(TFrom entity) 
+            where TFrom : IEntity<long> 
+            where TTo : IEntity<long>
         {
             if (entity == null)
                 throw new InvalidObjectException();

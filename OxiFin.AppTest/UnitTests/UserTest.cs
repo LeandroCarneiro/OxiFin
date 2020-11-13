@@ -21,7 +21,7 @@ namespace OxiFin.AppTest.UnitTests
         [TestMethod]
         public async Task CreateAsync()
         {
-            var mock = LoginMock.Default;
+            var mock = UserMock.Default;
             var result = await _AppService.AddAsync(mock);
 
             Assert.IsFalse(result.HasError);
