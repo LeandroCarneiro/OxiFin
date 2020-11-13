@@ -12,7 +12,7 @@ namespace OxiFin.Business.Auth
     {
         protected readonly IDbContext _uow;
         
-        public long Add(UserApp obj)
+        public async Task<long> AddAsync(UserApp obj)
         {
             throw new NotImplementedException();
         }

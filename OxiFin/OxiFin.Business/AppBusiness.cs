@@ -7,10 +7,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using OxiFin.Domain;
+using OxiFin.Application;
 
 namespace OxiFin.Business
 {
-    public abstract class AppBusiness<TEntity> : ICrud<TEntity, long> where TEntity : EntityBase<long>
+    public abstract class AppBusiness<TEntity> : IBusiness<TEntity>,
+        ICrud<TEntity, long> where TEntity : EntityBase<long>
     {
         protected readonly IDbContext _uow;
         protected DbSet<TEntity> Set => _uow.GetEntity<TEntity>();
@@ -20,13 +22,13 @@ namespace OxiFin.Business
             _uow = AppContainer.Resolve<IDbContext>();            
         }
 
-        public long Add(TEntity obj)
+        public async Task<long> AddAsync(TEntity obj)
         {
             using (var trans = _uow.BeginTransaction())
             {
-                _uow.GetEntity<TEntity>().Add(obj);
+                await _uow.GetEntity<TEntity>().AddAsync(obj);
                 trans.Commit();
-                _uow.Commit();
+                await _uow.Commit();
 
                 return obj.Id;
             }

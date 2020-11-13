@@ -19,10 +19,10 @@ namespace OxiFin.AppTest.UnitTests
         }
 
         [TestMethod]
-        public void Create()
+        public async Task CreateAsync()
         {
             var mock = LoginMock.Default;
-            var result = _AppService.Add(mock);
+            var result = await _AppService.AddAsync(mock);
 
             Assert.IsFalse(result.HasError);
         }
@@ -31,9 +31,9 @@ namespace OxiFin.AppTest.UnitTests
         public async Task FindAsync()
         {
             var mock = new Mock<UserApp_vw>().Object;
-            var result = _AppService.Add(mock);
+            var result = await _AppService.AddAsync(mock);
 
-            var user = await _AppService.FindByIdAsync((int)result.Result);            
+            var user = await _AppService.FindByIdAsync((int)result.Result);
             Assert.AreEqual(user.Result.Email, mock.Email);
         }
 
@@ -41,7 +41,7 @@ namespace OxiFin.AppTest.UnitTests
         public async Task DeleteAsync()
         {
             var mock = new Mock<UserApp_vw>().Object;
-            var result = _AppService.Add(mock);
+            var result = await _AppService.AddAsync(mock);
 
             await _AppService.DesativateAsync((int)result.Result);
             Assert.IsTrue(true);

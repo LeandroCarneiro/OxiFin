@@ -25,6 +25,10 @@ namespace OxiFin.Common.InternalObjects
     {
         public T Result { get; set; }
 
+        public AppResult() : base()
+        {
+        }
+
         public AppResult(T result) : base()
         {
             Result = result;
@@ -42,6 +46,10 @@ namespace OxiFin.Common.InternalObjects
 
     public class AppResult : AppResult<object>
     {
+        public AppResult() : base()
+        {
+        }
+
         public AppResult(object result) : base(result)
         {
         }

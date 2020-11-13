@@ -11,6 +11,7 @@ namespace OxiFin.Domain.Entities
         public decimal Amount { get; set; }
         public ECurrency Currency { get; set; }
         public DateTime Date { get; set; }
+        public long UserId { get; set; }
 
         [ForeignKey(nameof(BillId))]
         public virtual Bill Bill { get; set; }

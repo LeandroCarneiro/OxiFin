@@ -1,10 +1,8 @@
 ﻿using OxiFin.Application.Interfaces;
-using OxiFin.Business.Auth;
-using OxiFin.Domain.Entities;
 using OxiFin.Domain.Entities.Auth;
 using System.Threading.Tasks;
 
-namespace OxiFin.Business.Domain
+namespace OxiFin.Business.Auth
 {
     public class LoginBusiness : UserBusiness, ILoginBusiness
     {

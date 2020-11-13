@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace OxiFin.Domain.Entities
+﻿namespace OxiFin.ViewModels.AppObject
 {
-    [Table("tblBankAccounts")]
-    public class BankAccount : EntityBase<long>
+    public class BankAccount_vw : EntityBase_vw<long>
     {
         public string BankName { get; set; }
         public string Account { get; set; }

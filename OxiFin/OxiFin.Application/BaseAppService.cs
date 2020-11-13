@@ -21,9 +21,9 @@ namespace OxiFin.Application
             _baseBusiness = business;
         }
 
-        public virtual AppResult Add(T_vw obj)
+        public virtual async Task<AppResult> AddAsync(T_vw obj)
         {
-            return new AppResult(_baseBusiness.Add(Resolve(obj)));
+            return new AppResult(await _baseBusiness.AddAsync(Resolve(obj)));
         }
 
         public virtual void Update(T_vw obj)
