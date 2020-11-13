@@ -41,7 +41,7 @@ namespace OxiFin.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpClient();
 
-            DIBootstrap.RegisterTypes(services);
+            DIBootstrap.RegisterAppTypes(services);
 
             services.AddSwaggerDocument(document =>
             {

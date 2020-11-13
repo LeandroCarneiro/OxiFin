@@ -1,6 +1,4 @@
-﻿using Extensions;
-
-namespace OxiFin.ViewModels.AppObjects
+﻿namespace OxiFin.ViewModels.AppObjects
 {
     public class UserApp_vw : EntityBase_vw<long>
     {
@@ -8,16 +6,12 @@ namespace OxiFin.ViewModels.AppObjects
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
-
-        public string EncriptPassword => Password.ToSHA512();
+        public string Phone { get; set; }       
     }
 
     public class Login_vw
     {
         public string Username { get; set; }
         public string Password { get; set; }
-
-        public string EncriptPassword => Password.ToSHA512();   
     }
 }

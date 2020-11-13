@@ -33,7 +33,7 @@ namespace OxiFin.Application.AppServices
             if (user is null)            
                 return new AppResult("User not found");
             
-            var userSigninResult = await _userManager.CheckPasswordAsync(user, request.EncriptPassword);
+            var userSigninResult = await _userManager.CheckPasswordAsync(user, request.Password);
 
             if (userSigninResult)            
                 return new AppResult(Resolve(user));
@@ -44,7 +44,7 @@ namespace OxiFin.Application.AppServices
         public async Task<AppResult> SignUp(UserApp_vw request)
         {
             var user = Resolve(request);
-            var result = await _userManager.CreateAsync(user, request.EncriptPassword);
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
                 return new AppResult(result);

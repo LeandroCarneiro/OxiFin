@@ -32,7 +32,7 @@ namespace OxiFin.Auth
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpClient();
 
-            DIBootstrap.RegisterTypes(services);
+            DIBootstrap.RegisterAuthTypes(services);
 
             services.AddSwaggerDocument(document =>
             {

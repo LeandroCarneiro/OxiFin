@@ -10,11 +10,34 @@ namespace OxiFin.Bootstrap
 {
     public static class DIBootstrap
     {
-        public static void RegisterTypes(IServiceCollection service)
+        public static void RegisterAppTypes(IServiceCollection service)
         {
             service.RegisterAppServices()
                 .RegisterAppBusiness()
                 .RegisterAppPersistence();
+
+            service.AddIdentity<UserApp, Role>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1d);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+            })
+            .AddEntityFrameworkStores<AuthDbContext>()
+            .AddDefaultTokenProviders();
+
+            AppContainer.SetContainer(service);
+            AutoMapperConfiguration.Register();
+
+            Migrate(service);
+        }
+        
+        public static void RegisterAuthTypes(IServiceCollection service)
+        {
+            service.RegisterAuthServices()
+                .RegisterAuthBusiness()
+                .RegisterAuthPersistence();
 
             service.AddIdentity<UserApp, Role>(options =>
             {

@@ -12,7 +12,7 @@ namespace OxiFin.Bootstrap
 {
     public static class BigContainer
     {
-        public static IServiceCollection RegisterAppServices(this IServiceCollection service)
+        public static IServiceCollection RegisterAuthServices(this IServiceCollection service)
         {
             service.AddTransient<UserAppService>();
             service.AddTransient<LoginAppService>();
@@ -21,7 +21,17 @@ namespace OxiFin.Bootstrap
             return service;
         }
 
+        public static IServiceCollection RegisterAppServices(this IServiceCollection service)
+        {
+            return service;
+        }
+
         public static IServiceCollection RegisterAppBusiness(this IServiceCollection service)
+        {
+            return service;
+        }
+
+        public static IServiceCollection RegisterAuthBusiness(this IServiceCollection service)
         {
             service.AddTransient<IUserBusiness, UserBusiness>();
             service.AddTransient<ILoginBusiness, LoginBusiness>();
@@ -32,6 +42,12 @@ namespace OxiFin.Bootstrap
         {
             service.AddDbContext<AuthDbContext>();
             service.AddTransient<IDbContext, MySqlDbContext>();
+            return service;
+        }
+
+        public static IServiceCollection RegisterAuthPersistence(this IServiceCollection service)
+        {
+            service.AddDbContext<AuthDbContext>();
             return service;
         }
 

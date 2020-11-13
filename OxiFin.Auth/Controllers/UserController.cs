@@ -35,7 +35,5 @@ namespace OxiFin.Auth.Controllers
             await _appService.DesativateAsync(id);
             return Ok();
         }
-
-
     }
 }
