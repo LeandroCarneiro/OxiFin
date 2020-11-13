@@ -7,6 +7,7 @@ using OxiFin.Application.Interfaces;
 using OxiFin.Common.InternalObjects;
 using OxiFin.DI;
 using OxiFin.Domain.Entities.Auth;
+using OxiFin.ViewModels.AppObject;
 using OxiFin.ViewModels.AppObjects;
 using System;
 using System.Collections.Generic;
@@ -47,9 +48,9 @@ namespace OxiFin.Application.AppServices
             if (userSigninResult)
             {
                 var vw = Resolve<UserApp, UserLogged>(user);
-                vw.Token = GenerateJwt(request, new List<string>());
+                var resut = GenerateJwt(vw, new List<string>() { "ADMINISTRATOR" });
 
-                return new AppResult(Resolve(user));
+                return new AppResult(resut);
             }
 
             return new AppResult("Wrong Password");
@@ -66,7 +67,7 @@ namespace OxiFin.Application.AppServices
             return new AppResult(result.ToString());
         }
 
-        private string GenerateJwt(Login_vw user, IList<string> roles)
+        private TokenResult GenerateJwt(UserLogged user, IList<string> roles)
         {
             var claims = new List<Claim>()
             {
@@ -91,7 +92,12 @@ namespace OxiFin.Application.AppServices
                 signingCredentials: creds
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new TokenResult()
+            {
+                Value = new JwtSecurityTokenHandler().WriteToken(token),
+                User = user,
+                Expires = expires
+            };
         }
     }
 }
