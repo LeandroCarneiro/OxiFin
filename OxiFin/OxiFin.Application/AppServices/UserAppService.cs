@@ -1,7 +1,7 @@
 ﻿using Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OxiFin.Application.Interfaces;
 using OxiFin.Common.InternalObjects;
@@ -24,17 +24,31 @@ namespace OxiFin.Application.AppServices
         readonly IUserBusiness _business;
         private readonly UserManager<UserApp> _userManager;
         private readonly JwtSettings _jwtSettings;
+        private readonly IConfiguration _config;
 
-        public UserAppService(IUserBusiness business, IOptionsSnapshot<JwtSettings> jwtSettings) : base(business)
+        public UserAppService(IUserBusiness business, IConfiguration configuration) : base(business)
         {
             _userManager = AppContainer.Resolve<UserManager<UserApp>>();
             _business = business;
-            _jwtSettings = jwtSettings.Value;
+            _config = configuration;
+
+            _jwtSettings = _config.GetSection("Jwt").Get<JwtSettings>();
         }
 
         public async Task DesativateAsync(long userId)
         {
             await _business.DesativeAsync(userId);
+        }
+
+        public async Task<AppResult> AddUserToRole(string userName, string roleName)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == userName);
+            var result = await _userManager.AddToRoleAsync(user, roleName);
+
+            if (result.Succeeded)
+                return new AppResult();
+            else
+                return new AppResult(result.Errors);
         }
 
         public async Task<AppResult> SignIn(Login_vw request)
@@ -48,7 +62,8 @@ namespace OxiFin.Application.AppServices
             if (userSigninResult)
             {
                 var vw = Resolve<UserApp, UserLogged>(user);
-                var resut = GenerateJwt(vw, new List<string>() { "ADMINISTRATOR" });
+                var roles = await _userManager.GetRolesAsync(user);
+                var resut = GenerateJwt(vw, roles);
 
                 return new AppResult(resut);
             }

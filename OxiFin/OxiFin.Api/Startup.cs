@@ -54,6 +54,7 @@ namespace OxiFin.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UsePathBase("/oxifin");
 
             app.UseRouting();
             app.UseAuthorization();

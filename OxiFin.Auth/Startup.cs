@@ -44,7 +44,7 @@ namespace OxiFin.Auth
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-
+            app.UsePathBase("/auth");
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

@@ -35,5 +35,12 @@ namespace OxiFin.Auth.Controllers
             await _appService.DesativateAsync(id);
             return Ok();
         }
+
+        [HttpPost("User/{userEmail}/Role")]
+        public async Task<IActionResult> AddUserToRole(string userName, [FromBody] string roleName)
+        {
+            var result = await _appService.AddUserToRole(userName, roleName);
+            return ReturnResult(result);
+        }
     }
 }
