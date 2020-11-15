@@ -65,11 +65,11 @@ namespace JwtAuth.Config
 
         public static int TokenExpirationTime { get; set; }
 
-        public static TimeSpan ClockSkew { get; set; } = TimeSpan.FromHours(24);
+        public static TimeSpan ClockSkew { get; set; } 
 
-        public static string Issuer { get; set; } = "";
+        public static string Issuer { get; set; }
 
-        public static string Audience { get; set; } = "";
+        public static string Audience { get; set; }
 
         public static bool ValidateIssuerSigningKey { get; set; } = true;
 
