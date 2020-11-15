@@ -1,44 +1,56 @@
 ﻿using JwtAuth.Config;
 using Microsoft.IdentityModel.Tokens;
 using OxiFin.Common.Exceptions;
+using OxiFin.ViewModels.AppObject;
 using OxiFin.ViewModels.AppObjects;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 
 namespace JwtAuth
 {
     public static class JwtAuthenticator
     {
-        public static string GenerateToken(UserApp_vw user)
+        public static TokenResult GenerateToken(UserLogged user, IList<string> roles)
         {
             if (user == null)
                 throw new InvalidLoginException();
 
-            var handler = new JwtSecurityTokenHandler();
+            var claims = new List<Claim>()
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+            };
 
-            List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim("Id", user.Id.ToString()));
-            claims.Add(new Claim("Email", user.Email));
-            claims.Add(new Claim("Active", (user.Active).ToString()));
-            claims.Add(new Claim(ClaimTypes.Role, user.Role));
+            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));
+            claims.AddRange(roleClaims);
+
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(JwtTokenDefinitions.TokenExpirationTime));
+
+            var handler = new JwtSecurityTokenHandler();
 
             var securityToken = handler.CreateJwtSecurityToken(new SecurityTokenDescriptor
             {
                 Issuer = JwtTokenDefinitions.Issuer,
                 Audience = JwtTokenDefinitions.Audience,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                NotBefore = DateTime.Now.AddDays(1),
+                Expires = expires,
+                NotBefore = DateTime.Now,
                 SigningCredentials = JwtTokenDefinitions.SigningCredentials,
                 EncryptingCredentials = JwtTokenDefinitions.SigningCredentialsEncripted
             });
 
-            var token = handler.WriteToken(securityToken);
-
-            return token;
+            return new TokenResult()
+            {
+                Value = handler.WriteToken(securityToken),
+                User = user,
+                Expires = expires
+            };
         }
 
         public static UserApp_vw GetUser(string token)

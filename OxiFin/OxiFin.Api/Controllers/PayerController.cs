@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OxiFin.Application.AppServices;
 using OxiFin.Common.InternalObjects;
 using OxiFin.ViewModels.AppObject;
-using OxiFin.ViewModels.AppObjects;
 using System.Threading.Tasks;
 
 namespace OxiFin.Api.Controllers
 {
+    [Authorize("ADMINISTRATOR")]   
     public class PayerController : BaseController
     {
         private readonly PayerAppService _appService;

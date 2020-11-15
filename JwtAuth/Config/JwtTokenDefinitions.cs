@@ -10,14 +10,14 @@ namespace JwtAuth.Config
     {
         public static void LoadFromConfiguration(IConfiguration configuration)
         {
-            var config = configuration.GetSection("Jwt");
-            Key = config.GetValue<string>("Secret");
-            Audience = config.GetValue<string>("Audience");
-            Issuer = config.GetValue<string>("Issuer");
-            TokenExpirationTime = TimeSpan.FromDays(config.GetValue<int>("ExpirationInDays"));
-            ValidateIssuerSigningKey = config.GetValue<bool>("ValidateIssuerSigningKey");
-            ValidateLifetime = config.GetValue<bool>("ValidateLifetime");
-            ClockSkew = TimeSpan.FromMinutes(config.GetValue<int>("ClockSkew"));
+            var config = configuration.GetSection("Jwt").Get<JwtSettings>();
+            Key = config.Secret;
+            Audience = config.Audience;
+            Issuer = config.Issuer;
+            TokenExpirationTime = config.ExpirationInDays;
+            ValidateIssuerSigningKey = config.ValidateIssuerSigningKey;
+            ValidateLifetime = config.ValidateLifetime;
+            ClockSkew = TimeSpan.FromMinutes(config.ClockSkew);
         }
 
         private static string _key = "";
@@ -63,7 +63,7 @@ namespace JwtAuth.Config
             get => new EncryptingCredentials(IssuerSigningKey, SecurityAlgorithms.Aes256KW, SecurityAlgorithms.Aes256CbcHmacSha512);
         }
 
-        public static TimeSpan TokenExpirationTime { get; set; } = TimeSpan.FromHours(60);
+        public static int TokenExpirationTime { get; set; }
 
         public static TimeSpan ClockSkew { get; set; } = TimeSpan.FromHours(24);
 

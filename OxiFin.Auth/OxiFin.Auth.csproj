@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JwtAuth\JwtAuth.csproj" />
     <ProjectReference Include="..\OxiFin\OxiFin.Bootstrap\OxiFin.Bootstrap.csproj" />
   </ItemGroup>
 

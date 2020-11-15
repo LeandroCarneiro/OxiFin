@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\JwtAuth\JwtAuth.csproj" />
     <ProjectReference Include="..\OxiFin.Common\OxiFin.Common.csproj" />
     <ProjectReference Include="..\OxiFin.DI\OxiFin.DI.csproj" />
     <ProjectReference Include="..\OxiFin.Domain\OxiFin.Domain.csproj" />
