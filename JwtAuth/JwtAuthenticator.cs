@@ -55,10 +55,6 @@ namespace JwtAuth
 
         public static UserApp_vw GetUser(string token)
         {
-            token = token.Replace("Bearer ", "");
-            if (string.IsNullOrEmpty(token))
-                return null;
-
             var principal = GetPrincipal(token);
 
             return new UserApp_vw()
@@ -85,10 +81,14 @@ namespace JwtAuth
             }
         }
 
-        private static ClaimsPrincipal GetPrincipal(string token)
+        public static ClaimsPrincipal GetPrincipal(string token)
         {
             try
             {
+                token = token.Replace("Bearer ", "");
+                if (string.IsNullOrEmpty(token))
+                    return null;
+
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
                 JwtSecurityToken jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
 

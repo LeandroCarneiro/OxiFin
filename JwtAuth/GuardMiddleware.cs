@@ -23,8 +23,8 @@ namespace JwtAuth
 
             if (token.Any())
             {
-               var user = JwtAuthenticator.GetUser(token.First());
-               httpContext.Items["User"] = user;                
+               var user = JwtAuthenticator.GetPrincipal(token.First());
+               httpContext.User = user;                
             }
             await _next(httpContext).ConfigureAwait(true);
         }

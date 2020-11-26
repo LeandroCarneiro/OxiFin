@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using OxiFin.Common.InternalObjects;
 
 namespace OxiFin.Common.Middlewares
 {
@@ -29,21 +30,21 @@ namespace OxiFin.Common.Middlewares
                 _log.LogWarning(appEx, appEx.Message, context);
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(new { message = appEx.Message }));
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(new AppResult(appEx.Message)));
             }
             catch (AppBaseException appEx)
             {
                 _log.LogWarning(appEx, appEx.Message, context);
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(new { message = appEx.Message }));
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(new AppResult(appEx.Message)));
             }            
             catch (Exception ex)
             {
                 _log.LogWarning(ex, "Fatal Error", context);
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(new { message = "The system could not process your request" }));
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(new AppResult("The system could not process your request" )));
             }
         }
     }
