@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middlewares", "Middlewares"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuth", "JwtAuth\JwtAuth.csproj", "{52DED5BA-67C0-425A-B8CB-9C749AA2E8E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerLib", "SwaggerLib\SwaggerLib.csproj", "{9C44A00B-86B0-4166-8A54-3CE3AA2125EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{52DED5BA-67C0-425A-B8CB-9C749AA2E8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52DED5BA-67C0-425A-B8CB-9C749AA2E8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52DED5BA-67C0-425A-B8CB-9C749AA2E8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C44A00B-86B0-4166-8A54-3CE3AA2125EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C44A00B-86B0-4166-8A54-3CE3AA2125EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C44A00B-86B0-4166-8A54-3CE3AA2125EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C44A00B-86B0-4166-8A54-3CE3AA2125EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{1AC7D04D-7BCE-494C-BA87-FA980EE919D3} = {EC2CF07E-F79C-48AB-808E-7300FCCEE656}
 		{FEDC3545-AFB4-4C47-9D83-38B3CC1F864C} = {F77C9751-E783-49E3-94CD-BB71294DC7D7}
 		{52DED5BA-67C0-425A-B8CB-9C749AA2E8E2} = {FEDC3545-AFB4-4C47-9D83-38B3CC1F864C}
+		{9C44A00B-86B0-4166-8A54-3CE3AA2125EF} = {FEDC3545-AFB4-4C47-9D83-38B3CC1F864C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {837C5982-5CA6-4F92-9B02-4EFD6C11200C}

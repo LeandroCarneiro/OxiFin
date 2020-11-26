@@ -14,7 +14,6 @@ namespace OxiFin.Mapping.Profiles
         {
             CreateMap<EntityBase<long>, EntityBase_vw<long>>().ReverseMap();
             CreateMap<UserApp, UserApp_vw>().ReverseMap();
-            CreateMap<UserApp, UserLogged>().ReverseMap();
             CreateMap<Debtor, Debtor_vw>().ReverseMap();
             CreateMap<Debit, Debit_vw>().ReverseMap();
             CreateMap<Payer, Payer_vw>().ReverseMap();

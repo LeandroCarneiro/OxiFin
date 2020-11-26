@@ -11,10 +11,10 @@ namespace JwtAuth.Config
         public static void LoadFromConfiguration(IConfiguration configuration)
         {
             var config = configuration.GetSection("Jwt").Get<JwtSettings>();
-            Key = config.Secret;
+            Key = config.Key;
             Audience = config.Audience;
             Issuer = config.Issuer;
-            TokenExpirationTime = config.ExpirationInDays;
+            TokenExpirationTime = TimeSpan.FromMinutes(config.ExpirationInDays);
             ValidateIssuerSigningKey = config.ValidateIssuerSigningKey;
             ValidateLifetime = config.ValidateLifetime;
             ClockSkew = TimeSpan.FromMinutes(config.ClockSkew);
@@ -29,28 +29,21 @@ namespace JwtAuth.Config
 
         public static SymmetricSecurityKey IssuerSigningKey
         {
-            get => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
+            get => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key));
         }
 
         public static SecurityKey IssuerSecurityKey
         {
-            get => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
+            get => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key));
         }
 
         public static TokenValidationParameters TokenValidationParameters
             => new TokenValidationParameters()
             {
-                //RequireExpirationTime = true,
-                //ValidateIssuer = false,
-                //ValidateAudience = false,
-                IssuerSigningKey = IssuerSecurityKey,
-                TokenDecryptionKey = IssuerSigningKey,
-                ValidateIssuerSigningKey = ValidateIssuerSigningKey,
-                ValidAudience = Audience,
                 ValidIssuer = Issuer,
-                //ValidateLifetime = ValidateLifetime,
-                ClockSkew = ClockSkew,
-                RoleClaimType = "role"
+                ValidAudience = Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key)),
+                ClockSkew = TimeSpan.Zero
             };
 
         public static SigningCredentials SigningCredentials
@@ -63,16 +56,17 @@ namespace JwtAuth.Config
             get => new EncryptingCredentials(IssuerSigningKey, SecurityAlgorithms.Aes256KW, SecurityAlgorithms.Aes256CbcHmacSha512);
         }
 
-        public static int TokenExpirationTime { get; set; }
+        public static TimeSpan TokenExpirationTime { get; set; } = TimeSpan.FromHours(60);
 
-        public static TimeSpan ClockSkew { get; set; } 
+        public static TimeSpan ClockSkew { get; set; } = TimeSpan.FromHours(24);
 
-        public static string Issuer { get; set; }
+        public static string Issuer { get; set; } = "";
 
-        public static string Audience { get; set; }
+        public static string Audience { get; set; } = "";
 
         public static bool ValidateIssuerSigningKey { get; set; } = true;
 
         public static bool ValidateLifetime { get; set; } = true;
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OxiFin.Application.AppServices;
 using OxiFin.Common.InternalObjects;
 using OxiFin.ViewModels.AppObject;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace OxiFin.Api.Controllers
 {
+    [Authorize(Roles = "ADMINISTRATOR")]
     public class BankAccountController : BaseController
     {
         private readonly BankAccountAppService _appService;

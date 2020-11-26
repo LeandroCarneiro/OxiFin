@@ -11,11 +11,12 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />    
-    <PackageReference Include="NSwag.AspNetCore" Version="13.2.2" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.9.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\JwtAuth\JwtAuth.csproj" />
+    <ProjectReference Include="..\..\SwaggerLib\SwaggerLib.csproj" />
     <ProjectReference Include="..\OxiFin.Bootstrap\OxiFin.Bootstrap.csproj" />
   </ItemGroup>
 

@@ -14,23 +14,24 @@ namespace JwtAuth
 {
     public static class JwtAuthenticator
     {
-        public static TokenResult GenerateToken(UserLogged user, IList<string> roles)
+        public static TokenResult GenerateToken(UserApp_vw user, IList<string> roles)
         {
             if (user == null)
                 throw new InvalidLoginException();
 
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("Active", user.Active.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
             var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));
             claims.AddRange(roleClaims);
 
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(JwtTokenDefinitions.TokenExpirationTime));
+            var expires = DateTime.Now.AddDays(1);
 
             var handler = new JwtSecurityTokenHandler();
 
@@ -42,7 +43,6 @@ namespace JwtAuth
                 Expires = expires,
                 NotBefore = DateTime.Now,
                 SigningCredentials = JwtTokenDefinitions.SigningCredentials,
-                EncryptingCredentials = JwtTokenDefinitions.SigningCredentialsEncripted
             });
 
             return new TokenResult()
@@ -63,10 +63,10 @@ namespace JwtAuth
 
             return new UserApp_vw()
             {
-                Id = Convert.ToInt64(ExtractClaimValueFromPrinciple(principal, "Id")),
-                Email = ExtractClaimValueFromPrinciple(principal, "Email"),
-                Role = ExtractClaimValueFromPrinciple(principal, "Role"),
-                UserName = ExtractClaimValueFromPrinciple(principal, "UserName"),
+                Id = Convert.ToInt64(ExtractClaimValueFromPrinciple(principal, ClaimTypes.NameIdentifier)),
+                Email = ExtractClaimValueFromPrinciple(principal, ClaimTypes.Name),
+                Role = ExtractClaimValueFromPrinciple(principal, ClaimTypes.Role),
+                UserName = ExtractClaimValueFromPrinciple(principal, ClaimTypes.Name),
                 Active = Convert.ToBoolean(ExtractClaimValueFromPrinciple(principal, "Active"))
             };
         }

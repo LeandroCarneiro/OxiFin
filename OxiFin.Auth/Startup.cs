@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
-using Extensions;
 using JwtAuth;
 using JwtAuth.Config;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using OxiFin.Bootstrap;
 using OxiFin.Common.Middlewares;
+using SwaggerLib;
 
 namespace OxiFin.Auth
 {
@@ -48,24 +42,28 @@ namespace OxiFin.Auth
 
             DIBootstrap.RegisterAuthTypes(services);
 
-            services.AddSwaggerDocument(document =>
-            {
-                document.Title = "OxiFin Auth API";
-                document.DocumentName = "swagger";
-            }).AddOpenApiDocument(document => document.DocumentName = "OxiFin Auth API");
+            services.SetSwagger("Auth.API");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.SetSwagger();
             app.UseRouting();
+            app.UseCors(action =>
+              action
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowAnyOrigin());
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHsts();
+            app.UseHttpsRedirection();
+            app.UseGuardMiddleware();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
         }
     }
 }

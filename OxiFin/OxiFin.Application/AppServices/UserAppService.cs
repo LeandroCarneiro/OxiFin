@@ -8,6 +8,7 @@ using OxiFin.Application.Interfaces;
 using OxiFin.Common.InternalObjects;
 using OxiFin.DI;
 using OxiFin.Domain.Entities.Auth;
+using OxiFin.Mapping;
 using OxiFin.ViewModels.AppObject;
 using OxiFin.ViewModels.AppObjects;
 using System;
@@ -20,26 +21,25 @@ using System.Threading.Tasks;
 
 namespace OxiFin.Application.AppServices
 {
-    public class UserAppService : BaseAppService<UserApp_vw, UserApp>
+    public class UserAppService 
     {
-        readonly IUserBusiness _business;
         private readonly UserManager<UserApp> _userManager;
-        private readonly IConfiguration _config;
 
-        public UserAppService(IUserBusiness business) : base(business)
+        public UserAppService()
         {
             _userManager = AppContainer.Resolve<UserManager<UserApp>>();
-            _business = business;
         }
 
         public async Task DesativateAsync(long userId)
         {
-            await _business.DesativeAsync(userId);
+            var user = _userManager.Users.Where(x => x.Id == userId).FirstOrDefault();
+            user.Active = false;
+            await _userManager.UpdateAsync(user);            
         }
 
-        public async Task<AppResult> AddUserToRole(string userName, string roleName)
+        public async Task<AppResult> AddUserToRole(long userId, string roleName)
         {
-            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == userName);
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
             var result = await _userManager.AddToRoleAsync(user, roleName);
 
             if (result.Succeeded)
@@ -58,7 +58,7 @@ namespace OxiFin.Application.AppServices
 
             if (userSigninResult)
             {
-                var vw = Resolve<UserApp, UserLogged>(user);
+                var vw = MappingWraper.Map<UserApp, UserApp_vw>(user);
                 var roles = await _userManager.GetRolesAsync(user);
                 var resut = JwtAuthenticator.GenerateToken(vw, roles);
 
@@ -70,7 +70,8 @@ namespace OxiFin.Application.AppServices
 
         public async Task<AppResult> SignUp(UserApp_vw request)
         {
-            var user = Resolve(request);
+            var user = MappingWraper.Map<UserApp_vw, UserApp>(request);
+            user.Active = true;
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)

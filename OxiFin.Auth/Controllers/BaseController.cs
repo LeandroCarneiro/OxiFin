@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OxiFin.Common.Enums;
 using OxiFin.Common.InternalObjects;
 using System.Collections.Generic;
 using System.Linq;

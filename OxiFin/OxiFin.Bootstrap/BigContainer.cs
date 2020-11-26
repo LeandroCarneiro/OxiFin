@@ -1,10 +1,8 @@
 ﻿using OxiFin.Application.AppServices;
-using OxiFin.Application.Interfaces;
 using OxiFin.Business.Domain;
 using OxiFin.Data.Contexts;
 using OxiFin.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using OxiFin.Business.Auth;
 using Microsoft.AspNetCore.Identity;
 using OxiFin.Domain.Entities.Auth;
 using OxiFin.Domain.Entities;
@@ -26,8 +24,6 @@ namespace OxiFin.Bootstrap
 
         public static IServiceCollection RegisterAuthBusiness(this IServiceCollection service)
         {
-            service.AddTransient<IUserBusiness, UserBusiness>();
-            service.AddTransient<ILoginBusiness, LoginBusiness>();
             return service;
         }
         
@@ -37,8 +33,6 @@ namespace OxiFin.Bootstrap
             return service;
         }
 
-        
-        
         public static IServiceCollection RegisterAppServices(this IServiceCollection service)
         {
             service.AddTransient<BankAccountAppService>();
@@ -67,8 +61,6 @@ namespace OxiFin.Bootstrap
             service.AddTransient<IDbContext, MySqlDbContext>();
             return service;
         }
-        
-
 
 
         public static IServiceCollection MockRegisterAppPersistence(this IServiceCollection service)

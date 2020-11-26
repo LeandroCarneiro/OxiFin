@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OxiFin.Bootstrap;
 using OxiFin.Common.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -9,10 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using JwtAuth;
 using JwtAuth.Config;
+using SwaggerLib;
 
 namespace OxiFin.Api
 {
@@ -30,13 +26,12 @@ namespace OxiFin.Api
             services.Configure<FormOptions>(options =>
             {
                 options.ValueCountLimit = int.MaxValue;
-                options.ValueLengthLimit = int.MaxValue;
-                
+                options.ValueLengthLimit = int.MaxValue;                
             });
             
             JwtTokenDefinitions.LoadFromConfiguration(Configuration);
-            services.ConfigureJwtAuthentication();
             services.ConfigureJwtAuthorization();
+            services.ConfigureJwtAuthentication();
 
             services.AddCors();
 
@@ -47,28 +42,28 @@ namespace OxiFin.Api
             
             DIBootstrap.RegisterAppTypes(services);
 
-            services.AddSwaggerDocument(document =>
-            {
-                document.Title = "OxiFin API";
-                document.DocumentName = "swagger";
-            }).AddOpenApiDocument(document => document.DocumentName = "OxiFin API");
+            services.SetSwagger("OxiFin.API");
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-
+            app.SetSwagger();
             app.UseRouting();
+            app.UseCors(action =>
+              action
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowAnyOrigin());
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHsts();
+            app.UseHttpsRedirection();
+            app.UseGuardMiddleware();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
-
-            //app.UseHsts();            
         }
     }
 }

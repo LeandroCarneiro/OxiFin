@@ -8,6 +8,13 @@ using OxiFin.DI;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using OxiFin.Data.Configuration;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using OxiFin.Domain;
+using System;
+using OxiFin.Common.Exceptions;
+using OxiFin.Common.InternalObjects;
 
 namespace OxiFin.Data.Contexts
 {

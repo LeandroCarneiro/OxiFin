@@ -1,33 +1,32 @@
-﻿using OxiFin.Application.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
 using OxiFin.Common.InternalObjects;
-using OxiFin.Domain.Entities;
+using OxiFin.DI;
 using OxiFin.Domain.Entities.Auth;
 using OxiFin.ViewModels.AppObjects;
 using System.Threading.Tasks;
 
 namespace OxiFin.Application.AppServices
 {
-    public class LoginAppService : BaseAppService<Login_vw, UserApp>
+    public class LoginAppService
     {
-        readonly ILoginBusiness _business;
+        private readonly SignInManager<UserApp> _userManager;
 
-        public LoginAppService(ILoginBusiness business) : base(business) 
+        public LoginAppService() 
         {
-            _business = business;
+            _userManager = AppContainer.Resolve<SignInManager<UserApp>>();
         }
 
         public async Task<AppResult> Login(Login_vw user)
         {
-            var entity = Resolve(user);
-            var result = await _business.Login(entity);
+            var entity = Mapping.MappingWraper.Map<Login_vw, UserApp>(user);
+            await _userManager.SignInAsync(entity,true);
 
-            return new AppResult(result);
+            return new AppResult();
         }
         
-        public async Task LogOut(Login_vw user)
+        public async Task LogOut()
         {
-            var entity = Resolve(user);
-            await _business.LogOut(entity);
+            await _userManager.SignOutAsync();
         }
     }
 }

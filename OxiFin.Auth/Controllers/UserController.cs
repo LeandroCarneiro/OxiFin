@@ -1,8 +1,8 @@
 ﻿using OxiFin.Application.AppServices;
 using OxiFin.ViewModels.AppObjects;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using JwtAuth;
 
 namespace OxiFin.Auth.Controllers
 {
@@ -15,7 +15,7 @@ namespace OxiFin.Auth.Controllers
             _appService = appService;
         }
 
-        [HttpPost("signup")]
+        [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp(UserApp_vw request)
         {
             var result = await _appService.SignUp(request);
@@ -29,6 +29,7 @@ namespace OxiFin.Auth.Controllers
             return ReturnResult(result);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("Desative")]
         public async Task<IActionResult> Desative(long id)
         {
@@ -36,10 +37,11 @@ namespace OxiFin.Auth.Controllers
             return Ok();
         }
 
-        [HttpPost("User/{userEmail}/Role")]
-        public async Task<IActionResult> AddUserToRole(string userName, [FromBody] string roleName)
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("AddUserToRole")]
+        public async Task<IActionResult> AddUserToRole(long userId, string roleName)
         {
-            var result = await _appService.AddUserToRole(userName, roleName);
+            var result = await _appService.AddUserToRole(userId, roleName);
             return ReturnResult(result);
         }
     }
